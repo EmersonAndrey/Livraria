@@ -4,6 +4,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import view.CadastrarLivro;
 import view.CadastroADM;
 import view.EditarLivro;
 import view.ListarLivro;

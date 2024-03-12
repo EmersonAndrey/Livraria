@@ -14,13 +14,16 @@ import javax.swing.JTextField;
 
 public class CadastrarLivro extends JanelaPadrao {
 
+	private JTextField textIsbn;
 	private JTextField textTitulo;
 	private JTextField textGenero;
 	private JTextField textEditora;
 	private JTextArea taDescricao;
+	
 	private JSpinner spinnerQuantidade;
 	
 	private JLabel tituloJanela;
+	
 	
 	public CadastrarLivro() {
 		adicionarspinner();
@@ -30,6 +33,14 @@ public class CadastrarLivro extends JanelaPadrao {
 		setVisible(true);
 	}
 
+	public JTextField getTextIsbn() {
+		return textIsbn;
+	}
+
+	public void setTextIsbn(JTextField textIsbn) {
+		this.textIsbn = textIsbn;
+	}
+	
 	public JTextField getTextTitulo() {
 		return textTitulo;
 	}
@@ -81,13 +92,13 @@ public class CadastrarLivro extends JanelaPadrao {
 	private void adicionarbotoes() {
 		JButton btConfirmar = new JButton("Confirmar");
 		btConfirmar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btConfirmar.setBounds(685, 423, 119, 28);
+		btConfirmar.setBounds(698, 441, 119, 28);
 		btConfirmar.addActionListener(new OuvinteBotaoConfirmar());
 		getContentPane().add(btConfirmar);
 
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnVoltar.setBounds(41, 423, 119, 28);
+		btnVoltar.setBounds(41, 441, 119, 28);
 		btnVoltar.addActionListener(new OuvinteBotaoVoltar());
 		getContentPane().add(btnVoltar);
 
@@ -96,7 +107,7 @@ public class CadastrarLivro extends JanelaPadrao {
 	private void adicionarspinner() {
 		spinnerQuantidade = new JSpinner();
 		spinnerQuantidade.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		spinnerQuantidade.setBounds(608, 155, 80, 28);
+		spinnerQuantidade.setBounds(619, 227, 80, 28);
 		getContentPane().add(spinnerQuantidade);
 	}
 
@@ -113,24 +124,36 @@ public class CadastrarLivro extends JanelaPadrao {
 
 		textEditora = new JTextField();
 		textEditora.setColumns(10);
-		textEditora.setBounds(153, 295, 230, 28);
+		textEditora.setBounds(153, 297, 230, 28);
 		getContentPane().add(textEditora);
 		JScrollPane painel = new JScrollPane();
-		painel.setBounds(574, 234, 230, 94);
+		painel.setBounds(587, 303, 230, 94);
 		getContentPane().add(painel);
 
 		taDescricao = new JTextArea();
 		painel.setViewportView(taDescricao);
 		taDescricao.setLineWrap(true);
 		taDescricao.setWrapStyleWord(true);
+		
+		
+		textIsbn = new JTextField();
+		textIsbn.setColumns(10);
+		textIsbn.setBounds(531, 160, 230, 28);
+		getContentPane().add(textIsbn);
 
 	}
 
 	private void adicionarLabels() {
 		JLabel lblNewLabel_1_1_2_1 = new JLabel("Descrição:");
 		lblNewLabel_1_1_2_1.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_1_1_2_1.setBounds(438, 226, 135, 35);
+		lblNewLabel_1_1_2_1.setBounds(451, 295, 135, 35);
 		getContentPane().add(lblNewLabel_1_1_2_1);
+		
+		JLabel lblNewLabel_1_2 = new JLabel("ISBN:");
+		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD, 25));
+		lblNewLabel_1_2.setBounds(451, 160, 80, 28);
+		getContentPane().add(lblNewLabel_1_2);
+		
 
 		tituloJanela = new JLabel("Cadastrar Livro");
 		tituloJanela.setFont(new Font("Trebuchet MS", Font.BOLD, 50));
@@ -144,7 +167,7 @@ public class CadastrarLivro extends JanelaPadrao {
 
 		JLabel lblNewLabel_1_1 = new JLabel("Editora:");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_1_1.setBounds(41, 293, 102, 35);
+		lblNewLabel_1_1.setBounds(41, 295, 102, 35);
 		getContentPane().add(lblNewLabel_1_1);
 
 		JLabel lblNewLabel_1_1_1 = new JLabel("Gênero:");
@@ -154,7 +177,7 @@ public class CadastrarLivro extends JanelaPadrao {
 
 		JLabel lblNewLabel_1_1_2 = new JLabel("Quantidade:");
 		lblNewLabel_1_1_2.setFont(new Font("Tahoma", Font.BOLD, 25));
-		lblNewLabel_1_1_2.setBounds(438, 155, 160, 35);
+		lblNewLabel_1_1_2.setBounds(451, 222, 160, 35);
 		getContentPane().add(lblNewLabel_1_1_2);
 	}
 

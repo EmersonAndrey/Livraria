@@ -15,7 +15,8 @@ public class EditarLivro {
 		telaCadLivro.getTituloJanela().setText("Editar Livro");
 		telaCadLivro.getTituloJanela().setBounds(304, 10, 291, 59);
 		
-		telaCadLivro.getTextTitulo().setEnabled(false);
+		telaCadLivro.getTextIsbn().setText("exemplo");
+		telaCadLivro.getTextIsbn().setEnabled(false);
 		
 		// colocar todos os texts com os valores do livro que chegar
 		//pode mudar tudo menos o titulo(ele vai ser o identificador(PK))
