@@ -31,7 +31,7 @@ public class Programa {
 		}
 		
 		//verifica administrador tela cadastro ou login
-		new EditarLivro();
+		new CadastrarLivro();
 
 	}
 
