@@ -12,6 +12,9 @@ import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import controller.LivroController;
+import dto.LivroDTO;
+
 public class CadastrarLivro extends JanelaPadrao {
 
 	private JTextField textIsbn;
@@ -19,12 +22,11 @@ public class CadastrarLivro extends JanelaPadrao {
 	private JTextField textGenero;
 	private JTextField textEditora;
 	private JTextArea taDescricao;
-	
+
 	private JSpinner spinnerQuantidade;
-	
+
 	private JLabel tituloJanela;
-	
-	
+
 	public CadastrarLivro() {
 		adicionarspinner();
 		adicionarbotoes();
@@ -40,7 +42,7 @@ public class CadastrarLivro extends JanelaPadrao {
 	public void setTextIsbn(JTextField textIsbn) {
 		this.textIsbn = textIsbn;
 	}
-	
+
 	public JTextField getTextTitulo() {
 		return textTitulo;
 	}
@@ -134,8 +136,7 @@ public class CadastrarLivro extends JanelaPadrao {
 		painel.setViewportView(taDescricao);
 		taDescricao.setLineWrap(true);
 		taDescricao.setWrapStyleWord(true);
-		
-		
+
 		textIsbn = new JTextField();
 		textIsbn.setColumns(10);
 		textIsbn.setBounds(531, 160, 230, 28);
@@ -148,12 +149,11 @@ public class CadastrarLivro extends JanelaPadrao {
 		lblNewLabel_1_1_2_1.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblNewLabel_1_1_2_1.setBounds(451, 295, 135, 35);
 		getContentPane().add(lblNewLabel_1_1_2_1);
-		
+
 		JLabel lblNewLabel_1_2 = new JLabel("ISBN:");
 		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.BOLD, 25));
 		lblNewLabel_1_2.setBounds(451, 160, 80, 28);
 		getContentPane().add(lblNewLabel_1_2);
-		
 
 		tituloJanela = new JLabel("Cadastrar Livro");
 		tituloJanela.setFont(new Font("Trebuchet MS", Font.BOLD, 50));
@@ -196,13 +196,28 @@ public class CadastrarLivro extends JanelaPadrao {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (textTitulo.getText().isEmpty() || textGenero.getText().isEmpty() || textEditora.getText().isEmpty()
+			if (textIsbn.getText().isEmpty() || textTitulo.getText().isEmpty() || textGenero.getText().isEmpty() || textEditora.getText().isEmpty()
 					|| taDescricao.getText().isEmpty() || (int)spinnerQuantidade.getValue() <= 0) {
 				JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos ou maior que 0");
 				
 			}else {
-				// criar e add livro
+				try {
+					if(!LivroController.getInstance().isbnDuplicado(textIsbn.getText())) {
+						LivroController.getInstance().salvar(new LivroDTO(textIsbn.getText(), textTitulo.getText(), textGenero.getText(), textEditora.getText(), taDescricao.getText(), (int)spinnerQuantidade.getValue()));
+						JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
+						
+					}else {						
+						JOptionPane.showMessageDialog(null, "Livro com ISBN indicado já existe!"
+								+ "Altere o ISBN, e tente novamente.");
+					}					
+					
+				} catch (Exception e2) {					
+					System.out.println("Error!");
+					
+				}
 			}
+				
+			
 
 		}
 	}

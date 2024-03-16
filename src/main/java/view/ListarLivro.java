@@ -1,29 +1,29 @@
 package view;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
+import java.util.List;
 
-import javax.swing.JTable;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import controller.LivroController;
+import model.Livro;
 
 public class ListarLivro extends JanelaPadrao{
 	private JTable table;
+	private DefaultTableModel tabelaModelo;
 
 	public ListarLivro() {
 		adicionarbotoes();
 		adicionarlabels();
-		adicionartable();
+		adicionarTabela();
 		setVisible(true);	
-	}
-	
-
-	private void adicionartable() {
-		table = new JTable();
-		table.setBounds(68, 112, 747, 261);
-		getContentPane().add(table);
 	}
 
 	private void adicionarlabels() {
@@ -50,6 +50,52 @@ public class ListarLivro extends JanelaPadrao{
 		btnEditar.setBounds(696, 441, 119, 28);
 		btnEditar.addActionListener(new OuvinteBotaoEditar());
 		getContentPane().add(btnEditar);
+	}
+	
+	public void adicionarTabela() {
+		tabelaModelo = new DefaultTableModel();
+		tabelaModelo.addColumn("ISBN");
+		tabelaModelo.addColumn("Titulo");
+		tabelaModelo.addColumn("Quantidade");
+		
+		table = new JTable(tabelaModelo);
+		JScrollPane js = new JScrollPane(table);
+		
+		table.setBounds(68, 112, 747, 261);
+		getContentPane().add(table);
+		
+		List<Livro> todosLivros = null; 
+		try {
+			todosLivros = LivroController.getInstance().buscarTodos();
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		preencherTabela(todosLivros);		
+	}
+	
+	public void preencherTabela(List<Livro> listaLivros) {
+		
+		limparTabela(tabelaModelo, table);
+		
+		for (Livro livro : listaLivros) {			
+			Object[] linha = new Object[3];
+			
+			linha[0] = livro.getIsbn();
+			linha[1] = livro.getTitulo();
+			linha[2] = livro.getQuantidade();
+			
+			tabelaModelo.addRow(linha);
+			
+		}
+	}
+	
+	private void limparTabela(DefaultTableModel modelo, JTable tabela) {
+		int cont = modelo.getRowCount();
+		for (int i = 0; i < cont; i++) {
+			modelo.removeRow(0);
+		}
+		tabela.repaint();
 	}
 	
 	private class OuvinteBotaoVoltar implements ActionListener {
