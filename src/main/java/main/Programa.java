@@ -4,6 +4,8 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import dao.LivroDAO;
+import dto.LivroDTO;
 import view.CadastrarLivro;
 import view.CadastroADM;
 import view.EditarLivro;
@@ -31,8 +33,14 @@ public class Programa {
 		}
 		
 		//verifica administrador tela cadastro ou login
-		new CadastrarLivro();
-
+		LivroDAO l = new LivroDAO();
+		try {
+			l.salvar(new LivroDTO("a","a","a","a","a",1));
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

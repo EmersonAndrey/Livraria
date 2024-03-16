@@ -14,7 +14,7 @@ public class LivroDAO implements LivroInterfaceDAO{
 	
 	 
 	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("Livraria");
-	private EntityManager em = emf.createEntityManager(); 
+	private EntityManager em = emf.createEntityManager();
 
 	@Override
 	public boolean salvar(LivroDTO livro) throws Exception{
@@ -46,7 +46,7 @@ public class LivroDAO implements LivroInterfaceDAO{
 			Livro livroExistente = buscarLivroId(livro.getIsbn()); 
 			
 			if(livroExistente != null) {
-				iniciarConexao();
+				//iniciarConexao();
 				em.getTransaction().begin();
 				em.remove(livroExistente);
 				em.getTransaction().commit();
@@ -69,7 +69,7 @@ public class LivroDAO implements LivroInterfaceDAO{
 	public boolean editar(LivroDTO livro) throws Exception{
 		
 		try {
-			iniciarConexao();
+			//iniciarConexao();
 			em.getTransaction().begin();
 			em.merge(new Livro(livro));
 			em.getTransaction().commit();
@@ -90,7 +90,7 @@ public class LivroDAO implements LivroInterfaceDAO{
 	public Livro buscarLivroId(String idLivro) throws Exception {
 		
 		try {
-			iniciarConexao();
+			//iniciarConexao();
 			return em.find(Livro.class, idLivro);
 			
 		} catch (Exception e) {
@@ -112,10 +112,10 @@ public class LivroDAO implements LivroInterfaceDAO{
 		
 	}
 	
-	private void iniciarConexao() {
-		emf = Persistence.createEntityManagerFactory("Livraria");
-		em = emf.createEntityManager();
-	}
+//	private void iniciarConexao() {
+//		emf = Persistence.createEntityManagerFactory("Livraria");
+//		em = emf.createEntityManager();
+//	}
 	
 	private void fecharConexao() {
 		em.close();
