@@ -33,14 +33,9 @@ public class Programa {
 		}
 		
 		//verifica administrador tela cadastro ou login
-		LivroDAO l = new LivroDAO();
-		try {
-			l.salvar(new LivroDTO("a","a","a","a","a",1));
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		
+		new CadastrarLivro();
 	}
 
 }
