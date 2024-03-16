@@ -47,10 +47,10 @@ public class LivroController {
 	
 		
 	}
-	public boolean deletar(LivroDTO livro) throws Exception{
+	public boolean deletar(String ISBNlivro) throws Exception{
 		
 		try {
-			if(livroDAO.deletar(livro)) {
+			if(livroDAO.deletar(ISBNlivro)) {
 				return true;
 			}
 			

@@ -10,6 +10,7 @@ import view.CadastrarLivro;
 import view.CadastroADM;
 import view.EditarLivro;
 import view.ListarLivro;
+import view.Menu;
 
 public class Programa {
 
@@ -35,7 +36,7 @@ public class Programa {
 		//verifica administrador tela cadastro ou login
 		
 		
-		new CadastrarLivro();
+		new Menu();
 	}
 
 }

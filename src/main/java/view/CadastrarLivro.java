@@ -26,6 +26,8 @@ public class CadastrarLivro extends JanelaPadrao {
 	private JSpinner spinnerQuantidade;
 
 	private JLabel tituloJanela;
+	
+	private JButton btConfirmar;
 
 	public CadastrarLivro() {
 		adicionarspinner();
@@ -33,6 +35,14 @@ public class CadastrarLivro extends JanelaPadrao {
 		adicionarLabels();
 		adicionarTexts();
 		setVisible(true);
+	}
+
+	public JButton getBtConfirmar() {
+		return btConfirmar;
+	}
+
+	public void setBtConfirmar(JButton btConfirmar) {
+		this.btConfirmar = btConfirmar;
 	}
 
 	public JTextField getTextIsbn() {
@@ -92,7 +102,7 @@ public class CadastrarLivro extends JanelaPadrao {
 	}
 
 	private void adicionarbotoes() {
-		JButton btConfirmar = new JButton("Confirmar");
+		btConfirmar = new JButton("Confirmar");
 		btConfirmar.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btConfirmar.setBounds(698, 441, 119, 28);
 		btConfirmar.addActionListener(new OuvinteBotaoConfirmar());
@@ -209,7 +219,9 @@ public class CadastrarLivro extends JanelaPadrao {
 					}else {						
 						JOptionPane.showMessageDialog(null, "Livro com ISBN indicado já existe!"
 								+ "Altere o ISBN, e tente novamente.");
-					}					
+					}		
+					dispose();
+					new Menu();
 					
 				} catch (Exception e2) {					
 					System.out.println("Error!");

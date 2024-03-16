@@ -16,8 +16,10 @@ import controller.LivroController;
 import model.Livro;
 
 public class ListarLivro extends JanelaPadrao{
+	
 	private JTable table;
 	private DefaultTableModel tabelaModelo;
+	
 
 	public ListarLivro() {
 		adicionarbotoes();
@@ -43,6 +45,7 @@ public class ListarLivro extends JanelaPadrao{
 		JButton btnRemover = new JButton("Remover");
 		btnRemover.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnRemover.setBounds(549, 441, 119, 28);
+		btnRemover.addActionListener(new OuvinteBotaoRemover());
 		getContentPane().add(btnRemover);
 		
 		JButton btnEditar = new JButton("Editar");
@@ -61,15 +64,16 @@ public class ListarLivro extends JanelaPadrao{
 		table = new JTable(tabelaModelo);
 		JScrollPane js = new JScrollPane(table);
 		
-		table.setBounds(68, 112, 747, 261);
-		getContentPane().add(table);
+		js.setBounds(68, 112, 747, 261);
+		getContentPane().add(js);
 		
 		List<Livro> todosLivros = null; 
+		
 		try {
 			todosLivros = LivroController.getInstance().buscarTodos();
+		
 		} catch (Exception e) {
 			e.printStackTrace();
-			
 		}
 		preencherTabela(todosLivros);		
 	}
@@ -109,14 +113,27 @@ public class ListarLivro extends JanelaPadrao{
 	}
 	
 	private class OuvinteBotaoRemover implements ActionListener {
-
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (table.getSelectedRow() == -1) {
+			int linhaSelecionada = table.getSelectedRow();
+			
+			if (linhaSelecionada == -1) {
 				JOptionPane.showMessageDialog(null, "Selecione uma linha para remover");
 				
 			}else {
-				//remover
+				Object isbn = table.getValueAt(linhaSelecionada, 0);
+				System.out.println((String)isbn);
+				
+				try {
+					LivroController.getInstance().deletar((String)isbn);
+					JOptionPane.showMessageDialog(null, "Livro removido com sucesso");
+					dispose();
+					new ListarLivro();					
+					
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 			
 		}
@@ -126,11 +143,20 @@ public class ListarLivro extends JanelaPadrao{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (table.getSelectedRow() == -1) {
+			int linhaSelecionada = table.getSelectedRow();
+			
+			if (linhaSelecionada == -1) {
 				JOptionPane.showMessageDialog(null, "Selecione uma linha para editar");
 				
 			}else {
-				new EditarLivro();
+				dispose();
+				Object isbn = table.getValueAt(linhaSelecionada, 0);
+				try {
+					new EditarLivro(LivroController.getInstance().buscarLivroId((String)isbn));
+					
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 			
 		}
