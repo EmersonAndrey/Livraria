@@ -39,6 +39,10 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.2-1002-jdbc4</version>
 		</dependency>
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'main' of https://github.com/EmersonAndrey/Livraria.git
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
