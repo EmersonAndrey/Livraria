@@ -1,19 +1,17 @@
 package view;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import controller.AdministradorController;
-import model.Administrador;
-
-import javax.swing.JButton;
-import javax.swing.JPasswordField;
+import dto.AdministradorDTO;
 
 public class Login extends JanelaPadrao {
 	private JTextField campoEmail;
@@ -69,14 +67,16 @@ public class Login extends JanelaPadrao {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			String email = campoEmail.getText();
+			String senha = new String(campoSenha.getPassword());
 			
-			if (campoEmail.getText().isEmpty() || new String(campoSenha.getPassword()).isEmpty()) {
+			if (email.isEmpty() || senha.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos");
 				
 			} else
 				try {
-					Administrador adm = AdministradorController.getInstance().buscarADM().get(0);
-					if (adm.getEmail().equals(campoEmail.getText()) && adm.getSenha().equals(new String(campoSenha.getPassword()))) {
+					AdministradorDTO adm = new AdministradorDTO(AdministradorController.getInstance().buscarADM().get(0));
+					if (adm.getEmail().equals(email) && adm.getSenha().equals(senha)) {
 						dispose();
 						new Menu();
 						

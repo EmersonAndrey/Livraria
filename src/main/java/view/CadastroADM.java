@@ -81,17 +81,20 @@ public class CadastroADM extends JanelaPadrao{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (campoEmail.getText().isEmpty() || new String(campoSenha.getPassword()).isEmpty() 
-					|| new String(campoSenha2.getPassword()).isEmpty()) {
+			String email = campoEmail.getText();
+			String senha = new String(campoSenha.getPassword());
+			String confSenha = new String(campoSenha2.getPassword());
+					
+			if (email.isEmpty() || senha.isEmpty() || confSenha.isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos");
 				
-			}else if (!new String(campoSenha.getPassword()).equals(new String(campoSenha2.getPassword()))) {
+			}else if (!senha.equals(confSenha)) {
 				JOptionPane.showMessageDialog(null, "Campos de senha e confirmação de senha, devem coincidirem");
 				
 			}else {
 				
 				try {
-					AdministradorController.getInstance().salvarADM(new AdministradorDTO(campoEmail.getText(), new String(campoSenha.getPassword())));
+					AdministradorController.getInstance().salvarADM(new AdministradorDTO(email, senha));
 				
 				} catch (Exception e1) {
 					e1.printStackTrace();

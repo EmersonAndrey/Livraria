@@ -206,14 +206,20 @@ public class CadastrarLivro extends JanelaPadrao {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (textIsbn.getText().isEmpty() || textTitulo.getText().isEmpty() || textGenero.getText().isEmpty() || textEditora.getText().isEmpty()
-					|| taDescricao.getText().isEmpty() || (int)spinnerQuantidade.getValue() <= 0) {
+			String isbn = textIsbn.getText();
+			String titulo = textTitulo.getText();
+			String genero = textGenero.getText();
+			String editora = textEditora.getText();
+			String desc = taDescricao.getText();
+			int qtd = (int)spinnerQuantidade.getValue();
+			
+			if (isbn.isEmpty() || titulo.isEmpty() || genero.isEmpty() || editora.isEmpty() || desc.isEmpty() || qtd <= 0) {
 				JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos ou maior que 0");
 				
 			}else {
 				try {
-					if(!LivroController.getInstance().isbnDuplicado(textIsbn.getText())) {
-						LivroController.getInstance().salvar(new LivroDTO(textIsbn.getText(), textTitulo.getText(), textGenero.getText(), textEditora.getText(), taDescricao.getText(), (int)spinnerQuantidade.getValue()));
+					if(!LivroController.getInstance().isbnDuplicado(isbn)) {
+						LivroController.getInstance().salvar(new LivroDTO(isbn, titulo, genero, editora, desc, qtd));
 						JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso!");
 						
 					}else {						

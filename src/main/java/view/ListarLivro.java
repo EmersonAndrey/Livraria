@@ -2,7 +2,6 @@ package view;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -14,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.LivroController;
 import model.Livro;
+import utils.JLabelRenderer;
 
 public class ListarLivro extends JanelaPadrao{
 	
@@ -58,10 +58,17 @@ public class ListarLivro extends JanelaPadrao{
 	public void adicionarTabela() {
 		tabelaModelo = new DefaultTableModel();
 		tabelaModelo.addColumn("ISBN");
-		tabelaModelo.addColumn("Titulo");
+		tabelaModelo.addColumn("Título");
+		tabelaModelo.addColumn("Gênero");
+		tabelaModelo.addColumn("Editora");
+		tabelaModelo.addColumn("Descrição");
 		tabelaModelo.addColumn("Quantidade");
 		
+		
+		
 		table = new JTable(tabelaModelo);
+		table.getColumn("Descrição").setCellRenderer(new JLabelRenderer()); 
+		
 		JScrollPane js = new JScrollPane(table);
 		
 		js.setBounds(68, 112, 747, 261);
@@ -83,11 +90,18 @@ public class ListarLivro extends JanelaPadrao{
 		limparTabela(tabelaModelo, table);
 		
 		for (Livro livro : listaLivros) {			
-			Object[] linha = new Object[3];
+			Object[] linha = new Object[6];
 			
 			linha[0] = livro.getIsbn();
 			linha[1] = livro.getTitulo();
-			linha[2] = livro.getQuantidade();
+			linha[2] = livro.getGenero();
+			linha[3] = livro.getEditora();
+			
+			JLabel desc = new JLabel(livro.getDescricao());
+			desc.setToolTipText(livro.getDescricao());
+			linha[4] = desc;
+			
+			linha[5] = livro.getQuantidade();
 			
 			tabelaModelo.addRow(linha);
 			
