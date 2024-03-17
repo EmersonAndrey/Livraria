@@ -4,12 +4,17 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import org.postgresql.jdbc.EscapedFunctions;
+
+import controller.AdministradorController;
 import dao.LivroDAO;
 import dto.LivroDTO;
+import model.Administrador;
 import view.CadastrarLivro;
 import view.CadastroADM;
 import view.EditarLivro;
 import view.ListarLivro;
+import view.Login;
 import view.Menu;
 
 public class Programa {
@@ -23,6 +28,7 @@ public class Programa {
 					break;
 				}
 			}
+			
 		} catch (UnsupportedLookAndFeelException e) {
 			// handle exception
 		} catch (ClassNotFoundException e) {
@@ -33,10 +39,18 @@ public class Programa {
 			// handle exception
 		}
 		
-		//verifica administrador tela cadastro ou login
+		try {
+			if (AdministradorController.getInstance().buscarADM().size() > 0) {
+				new Login();
+				
+			} else {
+				new CadastroADM();
+			}
+			
+		} catch(Exception e) {
+			System.out.println("Error!");
+		}
 		
-		
-		new Menu();
 	}
 
 }

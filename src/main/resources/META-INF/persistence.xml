@@ -8,7 +8,8 @@
     <persistence-unit name="LivrariaProjeto" transaction-type="RESOURCE_LOCAL">
     
     	<class>model.Livro</class>
- 
+ 	
+ 	
         <properties>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Livraria" /> <!-- BD teste -->

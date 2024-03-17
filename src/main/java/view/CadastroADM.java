@@ -9,6 +9,10 @@ import java.awt.event.MouseListener;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import controller.AdministradorController;
+import dto.AdministradorDTO;
+
 import javax.swing.DropMode;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
@@ -85,7 +89,14 @@ public class CadastroADM extends JanelaPadrao{
 				JOptionPane.showMessageDialog(null, "Campos de senha e confirmação de senha, devem coincidirem");
 				
 			}else {
-				//Criar administrador e salva-lo
+				
+				try {
+					AdministradorController.getInstance().salvarADM(new AdministradorDTO(campoEmail.getText(), new String(campoSenha.getPassword())));
+				
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
 				dispose();
 				new Login();
 			}

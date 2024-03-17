@@ -8,6 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
+
+import controller.AdministradorController;
+import model.Administrador;
+
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
@@ -65,16 +69,24 @@ public class Login extends JanelaPadrao {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
 			if (campoEmail.getText().isEmpty() || new String(campoSenha.getPassword()).isEmpty()) {
 				JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos");
 				
-			}//else if () {
-//				verificar coincide adm cadastrado
-//				
-			else {
-				dispose();
-				new Menu();
-			}
+			} else
+				try {
+					Administrador adm = AdministradorController.getInstance().buscarADM().get(0);
+					if (adm.getEmail().equals(campoEmail.getText()) && adm.getSenha().equals(new String(campoSenha.getPassword()))) {
+						dispose();
+						new Menu();
+						
+					}else {
+						JOptionPane.showMessageDialog(null, "Campos de email e/ou senha, não coincidem com o administrador cadastrado");
+					}
+					
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			
 		}
 		
