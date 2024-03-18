@@ -16,9 +16,9 @@ public class Menu extends JanelaPadrao{
 	
 
 	private void adicionarLabels() {
-		JLabel lblMenu = new JLabel("Menu");
+		JLabel lblMenu = new JLabel("Livraria");
 		lblMenu.setFont(new Font("Trebuchet MS", Font.BOLD, 50));
-		lblMenu.setBounds(377, 22, 127, 92);
+		lblMenu.setBounds(341, 21, 188, 94);
 		getContentPane().add(lblMenu);
 	}
 
