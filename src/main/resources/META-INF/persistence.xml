@@ -8,6 +8,7 @@
     <persistence-unit name="LivrariaProjeto" transaction-type="RESOURCE_LOCAL">
     
     	<class>model.Livro</class>
+    	<class>model.Administrador</class>
  	
  	
         <properties>
